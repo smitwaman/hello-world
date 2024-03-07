@@ -11,20 +11,13 @@
     <name>Library</name>
     <description>A Java library project</description>
 
-   
-         <properties>
+    <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
     <dependencies>
         <!-- Add any dependencies your library project requires -->
-        <!-- Example: -->
-        <!-- <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
-        </dependency> -->
     </dependencies>
 
     <build>
@@ -38,7 +31,6 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.library.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
