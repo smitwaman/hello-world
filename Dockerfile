@@ -8,7 +8,7 @@ COPY * /usr/src/app/
 WORKDIR /usr/src/app
 
 # Copy the rest of the application files to the container
-COPY src /usr/src/app/src
+
 
 # Build the application with Maven
 RUN mvn clean package -X
