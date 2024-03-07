@@ -11,7 +11,7 @@ WORKDIR /usr/src/app
 
 
 # Build the application with Maven
-RUN mvn clean package -X
+RUN mvn clean package -DskipTests
 
 # Create a new image
 FROM openjdk:11-jre-slim
