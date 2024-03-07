@@ -20,7 +20,7 @@ FROM openjdk:11-jre-slim
 WORKDIR /usr/src/app
 
 # Copy the built JAR file from the builder stage to the current directory in the container
-COPY --from=builder /usr/src/app/target/*.jar ./
+COPY --from=builder /usr/src/app/target/library.jar ./
 
 # Specify the command to run your application
 CMD ["java", "-jar", "library.jar"]
