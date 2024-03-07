@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.library</groupId>
+    <groupId>com.example</groupId>
     <artifactId>library</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
@@ -16,22 +16,19 @@
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
+    <!-- Add any dependencies your library project requires -->
     <dependencies>
-             <dependencies>
-    <!-- Example: Adding Apache Commons Lang as a dependency -->
-    <dependency>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-lang3</artifactId>
-        <version>3.12.0</version>
-    </dependency>
-    
-    <!-- Add more dependencies as needed -->
-</dependencies>
-        <!-- Add any dependencies your library project requires -->
+        <!-- Example: Adding Apache Commons Lang as a dependency -->
+        <!-- <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency> -->
     </dependencies>
 
     <build>
         <plugins>
+            <!-- Configure Maven JAR plugin to include dependencies -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
