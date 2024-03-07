@@ -5,9 +5,7 @@ FROM maven:3.8.4-openjdk-11 AS builder
 COPY * /usr/src/app/
 
 # Set the working directory in the container
-WORKDIR /usr/src/app
-
-# Copy the rest of the application files to the container
+WORKDIR /usr/src/app/
 
 
 # Build the application with Maven
