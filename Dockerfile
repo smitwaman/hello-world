@@ -7,7 +7,9 @@ WORKDIR /usr/src/app
 # Copy the compiled Java application JAR file into the container at /usr/src/app
 COPY * /usr/src/app
 
-RUN mvn clean build 
+RUN mvn clean build
+
+COPY target/library.jar /usr/src/app/
 
 
 # Specify the command to run your application
