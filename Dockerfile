@@ -2,7 +2,7 @@
 FROM maven:3.8.4-openjdk-11 AS builder
 
 # Copy the pom.xml file to the container
-COPY pom.xml /usr/src/app/
+COPY * /usr/src/app/
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
