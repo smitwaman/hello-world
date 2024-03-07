@@ -11,6 +11,5 @@ RUN mvn clean build
 
 COPY target/library.jar /usr/src/app/
 
-
 # Specify the command to run your application
 CMD ["java", "-jar", "library.jar"]
