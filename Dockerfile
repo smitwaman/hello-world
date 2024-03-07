@@ -11,7 +11,7 @@ WORKDIR /usr/src/app
 COPY src /usr/src/app/src
 
 # Build the application with Maven
-RUN mvn clean package
+RUN mvn clean package -X
 
 # Create a new image
 FROM openjdk:11-jre-slim
