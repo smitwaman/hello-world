@@ -1,24 +1,21 @@
-# Use an OpenJDK image as the base image
-FROM openjdk:11-jdk AS builder
+# Use Maven image with JDK 11
+FROM maven:3.8.2-jdk-11
 
-# Set the working directory in the container
-WORKDIR /app
+# Set working directory inside the container
+WORKDIR /usr/src/library
 
-# Copy the Java source files into the container
-COPY * /app
+# Copy the Maven project file to the container
+COPY pom.xml .
 
-# Compile the Java files
-RUN mvn build package -DskipTests
+# Download all dependencies and build the project
+RUN mvn dependency:go-offline
 
-# Create a new image
-FROM openjdk:11-jre-slim
+# Copy the source code to the container
+COPY src ./src
 
-# Set the working directory in the container
-WORKDIR /app
+# Build the project
+RUN mvn package
 
-# Copy the compiled class files from the builder stage to the current directory in the container
-COPY --from=builder /app/target/library.jar ./
-
-# Specify the command to run your application
-CMD ["java", "Library"]
+# Define the command to run the application
+CMD ["java", "-cp", "target/library.jar", "Library"]
 
