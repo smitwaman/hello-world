@@ -17,6 +17,16 @@
     </properties>
 
     <dependencies>
+             <dependencies>
+    <!-- Example: Adding Apache Commons Lang as a dependency -->
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.12.0</version>
+    </dependency>
+    
+    <!-- Add more dependencies as needed -->
+</dependencies>
         <!-- Add any dependencies your library project requires -->
     </dependencies>
 
