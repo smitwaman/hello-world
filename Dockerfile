@@ -1,15 +1,26 @@
-# Use an official OpenJDK runtime as a base image
+# Use a Maven image as a base image
+FROM maven:3.8.4-openjdk-11 AS builder
+
+# Copy the pom.xml file to the container
+COPY pom.xml /usr/src/app/
+
+# Set the working directory in the container
+WORKDIR /usr/src/app
+
+# Copy the rest of the application files to the container
+COPY src /usr/src/app/src
+
+# Build the application with Maven
+RUN mvn clean package
+
+# Create a new image
 FROM openjdk:11-jre-slim
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
 
-# Copy the compiled Java application JAR file into the container at /usr/src/app
-COPY * /usr/src/app
-
-RUN mvn clean build
-
-COPY target/library.jar /usr/src/app/
+# Copy the built JAR file from the builder stage to the current directory in the container
+COPY --from=builder /usr/src/app/target/*.jar ./
 
 # Specify the command to run your application
 CMD ["java", "-jar", "library.jar"]
