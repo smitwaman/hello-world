@@ -11,7 +11,7 @@ COPY pom.xml .
 COPY src ./src
 
 # Build the project using Maven
-RUN mvn clean package
+RUN mvn clean package -X
 
 # Use a lightweight base image with OpenJDK 17 to run the application
 FROM adoptopenjdk/openjdk17
