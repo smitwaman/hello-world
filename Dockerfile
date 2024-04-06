@@ -1,21 +1,27 @@
-# Use Maven image with JDK 11
-FROM maven:3.8.2-jdk-11
+# Use an official Maven image as a parent image
+FROM maven:3.8.4-openjdk-17-slim AS build
 
-# Set working directory inside the container
-WORKDIR /
+# Set the working directory in the container
+WORKDIR /app
 
-# Copy the Maven project file to the container
-COPY * /
+# Copy the pom.xml file to the working directory
+COPY pom.xml .
 
-# Download all dependencies and build the project
+# Copy the rest of the project
+COPY src ./src
+
+# Build the project using Maven
 RUN mvn clean package
 
-# Copy the source code 
-COPY /target/Task-Management-System.jar /
+# Use a lightweight base image with OpenJDK 17 to run the application
+FROM adoptopenjdk/openjdk17:jdk-17.0.2_8-alpine
 
-# Expose
-EXPOSE 8080
+# Set the working directory in the container
+WORKDIR /app
 
-# Define the command to run the application
-CMD ["java", "-jar", "Task-Management-System"]
+# Copy the JAR file from the build stage to the working directory in the container
+COPY --from=build /app/target/*.jar ./app.jar
+
+# Specify the command to run your application
+CMD ["java", "-jar", "app.jar"]
 
