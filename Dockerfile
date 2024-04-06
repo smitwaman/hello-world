@@ -1,5 +1,5 @@
 # Use an official Maven image as a builder
-FROM maven:3.8.4-openjdk-17 AS builder
+FROM maven:3.8.3-openjdk-17
 
 # Set the working directory in the container
 WORKDIR /app
@@ -16,7 +16,7 @@ RUN ./mvnw dependency:go-offline
 RUN ./mvnw package -DskipTests
 
 # Use a lightweight base image with OpenJDK 17 to run the application
-FROM adoptopenjdk/openjdk17:jdk-17.0.2_8-alpine AS runner
+FROM maven:3.8.3-openjdk-17
 
 # Set the working directory in the container
 WORKDIR /app
