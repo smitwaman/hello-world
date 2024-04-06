@@ -9,8 +9,7 @@ COPY * .
 
 
 # Download dependencies and package the application
-RUN ./mvnw dependency:go-offline
-RUN ./mvnw package -X
+RUN mvn clean packge
 
 # Use a lightweight base image with OpenJDK 17 to run the application
 FROM maven:3.8.3-openjdk-17
