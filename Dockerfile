@@ -5,15 +5,12 @@ FROM maven:3.8.3-openjdk-17
 WORKDIR /app
 
 # Copy the Maven wrapper files
-COPY mvnw .
-COPY .mvn .mvn
+COPY * .
 
-# Copy the project configuration files
-COPY pom.xml .
 
 # Download dependencies and package the application
 RUN ./mvnw dependency:go-offline
-RUN ./mvnw package -DskipTests
+RUN ./mvnw package -X
 
 # Use a lightweight base image with OpenJDK 17 to run the application
 FROM maven:3.8.3-openjdk-17
