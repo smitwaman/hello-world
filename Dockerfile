@@ -14,7 +14,7 @@ COPY src ./src
 RUN mvn clean package
 
 # Use a lightweight base image with OpenJDK 17 to run the application
-FROM adoptopenjdk/openjdk17:jdk-17.0.2_8-alpine
+FROM adoptopenjdk/openjdk17
 
 # Set the working directory in the container
 WORKDIR /app
