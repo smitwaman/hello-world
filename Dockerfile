@@ -2,20 +2,20 @@
 FROM maven:3.8.2-jdk-11
 
 # Set working directory inside the container
-WORKDIR /usr/src/library
+WORKDIR /
 
 # Copy the Maven project file to the container
-COPY pom.xml .
+COPY * .
 
 # Download all dependencies and build the project
-RUN mvn dependency:go-offline
+RUN mvn clean package
 
-# Copy the source code to the container
-COPY src ./src
+# Copy the source code 
+COPY target/app.jar /
 
-# Build the project
-RUN mvn package
+# Expose
+EXPOSE 8080
 
 # Define the command to run the application
-CMD ["java", "-cp", "target/library.jar", "Library"]
+CMD ["java", "-jar", "app.jar"]
 
