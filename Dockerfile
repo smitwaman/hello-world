@@ -2,16 +2,16 @@
 FROM maven:3.8.2-jdk-11
 
 # Set working directory inside the container
-WORKDIR ./
+WORKDIR /
 
 # Copy the Maven project file to the container
-COPY * .
+COPY * /
 
 # Download all dependencies and build the project
 RUN mvn clean package
 
 # Copy the source code 
-COPY target/Task-Management-System.jar ./
+COPY /target/Task-Management-System.jar /
 
 # Expose
 EXPOSE 8080
