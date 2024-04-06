@@ -6,8 +6,6 @@ WORKDIR /app
 
 # Copy the Maven wrapper files
 COPY * .
-
-
 # Download dependencies and package the application
 RUN mvn clean packge
 
