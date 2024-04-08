@@ -33,10 +33,10 @@ pipeline {
                 script {
                      withSonarQubeEnv(credentialsId: 'sonar') {
   
-sh 'sonar \
+sh 'mvn clean verify sonar:sonar \
   -Dsonar.projectKey=hello-world \
   -Dsonar.host.url=http://localhost:9000 \
-  -Dsonar.login=83a3820a62d222a687fa487a6cc6a7c1b2196af8'
+  -Dsonar.login=945cc54814427765d676271263db9c5a9c56188c'
                     }
                 }
             }
