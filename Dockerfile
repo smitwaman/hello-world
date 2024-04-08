@@ -4,6 +4,7 @@ FROM openjdk:11-jre-slim
 # Set the working directory in the container
 WORKDIR /usr/src/app
 
+COPY * /usr/src/app
 # Copy the application JAR file into the container at /usr/src/app
 COPY target/calculator.jar /usr/src/app/
 
