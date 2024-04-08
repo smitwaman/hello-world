@@ -2,9 +2,7 @@ pipeline {
 
   agent any
 
- environment {
-        SONAR_TOKEN = credentials('sonar')
-    }
+ 
 
   
   tools {
@@ -38,7 +36,7 @@ pipeline {
 sh 'sonar \
   -Dsonar.projectKey=hello-world \
   -Dsonar.host.url=http://localhost:9000 \
-  -Dsonar.login=$SONAR_TOKEN'
+  -Dsonar.login=83a3820a62d222a687fa487a6cc6a7c1b2196af8'
                     }
                 }
             }
