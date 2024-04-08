@@ -1,15 +1,7 @@
-# Use an official OpenJDK runtime as a base image
-FROM openjdk:11-jre-slim
+FROM openjdk:8-jdk-alpine
 
-# Set the working directory in the container
-WORKDIR /
+ADD ./target/helloworld-0.0.1-SNAPSHOT.jar helloworld-0.0.1-SNAPSHOT.jar
 
-COPY * /
-# Copy the application JAR file into the container at /usr/src/app
-COPY /target/calculator.jar /
-
-# Expose the port that the application will run on
 EXPOSE 8080
 
-# Define the command to run your application when the container starts
-CMD ["java", "-jar", "calculator.jar"]
+CMD java -jar helloworld-0.0.1-SNAPSHOT.jar

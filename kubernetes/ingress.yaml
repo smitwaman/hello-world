@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+  name: cicd-java-maven
+  namespace: cicd-java-maven
+spec:
+  rules:
+    - host: exmaple-test.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: cicd-java-maven
+                port:
+                  number: 80
