@@ -5,10 +5,10 @@ FROM openjdk:11-jre-slim
 WORKDIR /usr/src/app
 
 # Copy the application JAR file into the container at /usr/src/app
-COPY target/calculator.jar /usr/src/app
+COPY target/calculator.jar /usr/src/app/
 
 # Expose the port that the application will run on
 EXPOSE 8080
 
 # Define the command to run your application when the container starts
-CMD ["java", "-jar", "calculator.jar"]
+CMD ["java", "-jar", "/usr/src/app/calculator.jar"]
