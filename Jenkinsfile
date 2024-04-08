@@ -33,8 +33,9 @@ pipeline {
     stage('SonarQube Analysis') {
             steps {
                 script {
-                     withSonarQubeEnv('SonarQubeServer') {
-                        sh 'sonar \
+                     withSonarQubeEnv(credentialsId: 'sonar') {
+  
+sh 'sonar \
   -Dsonar.projectKey=hello-world \
   -Dsonar.host.url=http://localhost:9000 \
   -Dsonar.login=$SONAR_TOKEN'
