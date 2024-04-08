@@ -5,6 +5,7 @@ pipeline {
   tools {
     git 'git'
     maven 'maven'
+    sonar 'sonar'
   }
   
 
@@ -24,7 +25,19 @@ pipeline {
         }
       }
     }
-
+    stage('SonarQube Analysis') {
+            steps {
+                script {
+                    // Execute SonarQube scan
+                    withSonarQubeEnv('SonarQubeServer') {
+                        sh 'mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=hello-world \
+  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.login=e3643a1be09e722440027d395c63a45eb4cdf99e'
+                    }
+                }
+            }
+        }
 
     
   }
