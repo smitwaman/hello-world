@@ -41,7 +41,7 @@ pipeline {
 
 
                   
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                    docker.withRegistry('https://hub.docker.com', 'dockerhub') {
                         docker.image('helloworld').push('latest')
                     }
                 }
