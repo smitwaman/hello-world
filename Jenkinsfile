@@ -5,7 +5,7 @@ pipeline {
   tools {
     git 'git'
     maven 'maven'
-    sonar 'hudson.plugins.sonar.SonarRunnerInstallation'
+    tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
   }
   
 
