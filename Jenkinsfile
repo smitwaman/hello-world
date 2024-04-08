@@ -4,7 +4,7 @@ pipeline {
 
  environment {
         SONAR_TOKEN = credentials('sonar')
-        DOCKERHUB_TOKEN = credentials('dockerhub')   
+      
     }
 
   
@@ -60,7 +60,7 @@ sh 'mvn clean verify sonar:sonar \
 
 
                   
-                    docker.withRegistry('https://registry.hub.docker.com', '$DOCKERHUB_TOKEN') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                         docker.image('hello-world').push('latest')
                     }
                 }
