@@ -3,6 +3,7 @@ pipeline {
   agent any
 
   tools{
+    git 'git'
     mvn 'mvn'
   }
   environment {
@@ -11,13 +12,11 @@ pipeline {
 
   stages {
 
-    stage("Git Checkout") {
-      steps {
-        script {
-           sh "git scm"
+    stage('Checkout') {
+            steps {
+                checkout scm // Checkout source code from version control
+            }
         }
-      }
-    }
 
     stage("Maven Build") {
       steps {
