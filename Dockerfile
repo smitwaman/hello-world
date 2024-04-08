@@ -1,22 +1,14 @@
-# Use an official Maven image as a builder
-FROM maven:3.8.3-openjdk-17
+# Use an official OpenJDK runtime as a base image
+FROM openjdk:11-jre-slim
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /usr/src/app
 
-# Copy the Maven wrapper files
-COPY * .
-# Download dependencies and package the application
-RUN mvn clean packge
+# Copy the application JAR file into the container at /usr/src/app
+COPY target/my-java-project.jar /usr/src/app
 
-# Use a lightweight base image with OpenJDK 17 to run the application
-FROM maven:3.8.3-openjdk-17
+# Expose the port that the application will run on
+EXPOSE 8080
 
-# Set the working directory in the container
-WORKDIR /app
-
-# Copy the packaged JAR file from the builder stage to the runner stage
-COPY --from=builder /app/target/*.jar app.jar
-
-# Specify the command to run your application
-CMD ["java", "-jar", "app.jar"]
+# Define the command to run your application when the container starts
+CMD ["java", "-jar", "my-java-project.jar"]
