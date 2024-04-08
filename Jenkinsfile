@@ -36,7 +36,7 @@ pipeline {
 sh 'mvn clean verify sonar:sonar \
   -Dsonar.projectKey=hello-world \
   -Dsonar.host.url=http://localhost:9000 \
-  -Dsonar.login=945cc54814427765d676271263db9c5a9c56188c'
+  -Dsonar.login=0f8f4d5b25f489b2e04ad8519a715fc3946b7bef'
                     }
                 }
             }
