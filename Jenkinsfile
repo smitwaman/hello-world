@@ -50,6 +50,15 @@ sh 'mvn clean verify sonar:sonar \
                 }
             }
         }
-    
+    stage('Push Docker Image') {
+            steps {
+                // Push Docker image to Docker Hub repository
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker') {
+                        docker.image('hello-world').push('latest')
+                    }
+                }
+            }
+        }
   }
 }
