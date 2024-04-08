@@ -41,7 +41,13 @@ sh 'mvn clean verify sonar:sonar \
                 }
             }
         }
-
+   stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build('hello-world')
+                }
+            }
+        }
     
   }
 }
