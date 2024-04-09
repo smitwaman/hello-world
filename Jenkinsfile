@@ -16,12 +16,20 @@ pipeline {
 
 
   stages {
+    
+    stage('Workspace Cleaning'){
+            steps{
+                cleanWs()
+            }
+        }
+    
     stage('Checkout') {
       steps {
             checkout scm // Checkout source code from version control
             }
                       }
 
+    
     stage("Maven Build") {
       steps {
         script {
@@ -29,6 +37,9 @@ pipeline {
         }
       }
     }
+    
+    
+    
     stage('SonarQube Analysis') {
             steps {
                 script {
@@ -38,10 +49,10 @@ pipeline {
                                       -Dsonar.projectKey=hello-world \
                                       -Dsonar.host.url=http://localhost:9000 \
                                       -Dsonar.login=$SONAR_TOKEN'
+                    }
+                 }
               }
-            }
-          }
-        }
+           }
 
     stage('Build Docker Image') {
       steps {
@@ -53,7 +64,13 @@ pipeline {
               }
             } 
           }
-     
+    stage("TRIVY"){
+      steps{
+             sh "trivy image smitwaman/helloworld:latest > trivy.txt"
+          }  
+        } 
+   
+    
     stage('Push Docker Image') {
             steps {
                 // Push Docker image to Docker Hub repository
@@ -61,10 +78,14 @@ pipeline {
                   
                   docker.withRegistry('https://registry-1.docker.io/v2/', 'dockerhub') {
                         docker.image('smitwaman/helloworld').push('latest')
-                    }
-                   }
+                        }
+                     }
                   }
-                 }
-  
+              }
+   
+
+
+
+    
   }
 }
