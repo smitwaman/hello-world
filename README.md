@@ -1,6 +1,9 @@
+
+
 # This is simple CICD pipeline for hello-world java application.
+- PHASE-1:
 Tools -
-CI- Continuous Integration usinf jenkins
+CI- Continuous Integration using jenkins
 1. GIT
 2. MAVEN
 3. SONARQUBE
