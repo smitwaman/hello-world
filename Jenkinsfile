@@ -36,9 +36,9 @@ pipeline {
                 // Push Docker image to Docker Hub repository
                 script {
                   
-                  docker.withRegistry('https://docker.io', 'dockerhub') {
+                  docker.withRegistry('https://docker.io/smitwaman', 'dockerhub') {
                         
-                                               docker.image('smitwaman/helloworld').push('latest')
+                                               docker.image('helloworld').push('latest')
                                                                        }
                        }
                   }
