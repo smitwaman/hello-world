@@ -29,7 +29,7 @@ pipeline {
             docker.build('helloworld')
 
           // Tag Docker image
-                    docker.image('helloworld').tag('smitwaman/helloworld:latest')
+                    docker.image('smitwaman/helloworld').tag('latest')
               }
             } 
                               }
