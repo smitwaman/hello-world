@@ -1,7 +1,8 @@
 
 
 # This is simple CICD pipeline for hello-world java application.
-- PHASE-1:
+- PHASE:1
+
 Tools -
 CI- Continuous Integration using jenkins
 1. GIT
@@ -18,3 +19,8 @@ Steps we are following:
 5. Add credentials in global list for docker, git, sonar.
 6. Write 'dockerfile' and 'jenkinsfile' stages.
 7. Run your build  
+
+- PHASE:2
+
+Tools -
+  
