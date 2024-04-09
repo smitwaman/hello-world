@@ -41,4 +41,5 @@ Tools -
 
 12. Finally configure gmail smtp for email notifications.
 
-
+- PHASE:4
+13. Configure and monitor jenkins server and kubernetes using prometheus and grafana
