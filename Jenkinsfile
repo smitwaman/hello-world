@@ -26,7 +26,7 @@ pipeline {
     stage('Build Docker Image') {
       steps {
        script {
-            docker.build('helloworld')
+            docker.build('smitwaman/helloworld')
               }
             } 
                               }
@@ -36,9 +36,9 @@ pipeline {
                 // Push Docker image to Docker Hub repository
                 script {
                   
-                  docker.withRegistry('https://docker.io/smitwaman/', 'dockerhub') {
+                  docker.withRegistry('https://docker.io', 'dockerhub') {
                         
-                                               docker.image('helloworld').push('latest')
+                                               docker.image('smitwaman/helloworld').push('latest')
                                                                        }
                        }
                   }
