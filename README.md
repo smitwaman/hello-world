@@ -20,6 +20,13 @@ Steps we are following:
 6. Write 'dockerfile' and 'jenkinsfile' stages.
 7. Run your build  
 
+You can run application after dockerize it:
+
+```
+ sudo docker run --name helloworld -p 8086:8080 smiwaman/helloworld:latest
+```
+
+
 - PHASE:2
 
 Tools -
