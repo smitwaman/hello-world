@@ -4,7 +4,6 @@ pipeline {
 
   environment {
         SONAR_TOKEN = credentials('sonar')
-        DOCKER_HUB_REGISTRY = 'docker.io'
   }
 
   
@@ -36,9 +35,10 @@ pipeline {
             steps {
                 // Push Docker image to Docker Hub repository
                 script {
-            docker.withRegistry('$DOCKER_HUB_REGISTRY', 'dockerhub') {
+                  
+                  docker.withRegistry('docker.io', 'dockerhub') {
                         
-              docker.image('helloworld').push('latest')
+                                               docker.image('helloworld').push('latest')
                                                                        }
                        }
                   }
