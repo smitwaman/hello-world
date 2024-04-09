@@ -38,7 +38,7 @@ pipeline {
                   
                   docker.withRegistry('https://docker.io', 'dockerhub') {
                         
-                                               docker.image('helloworld').push('latest')
+                                               docker.image('hello-world').push('latest')
                                                                        }
                        }
                   }
