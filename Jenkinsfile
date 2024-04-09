@@ -26,7 +26,7 @@ pipeline {
     stage('Build Docker Image') {
       steps {
        script {
-            docker.build('helloworld')
+            docker.build('smitwaman/helloworld')
 
           // Tag Docker image
                     docker.image('smitwaman/helloworld').tag('latest')
