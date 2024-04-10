@@ -1,5 +1,3 @@
-
-
 # This is simple CICD pipeline for hello-world java application.
 - PHASE:1
 
@@ -10,6 +8,7 @@ CI- Continuous Integration using jenkins
 3. SONARQUBE
 4. DOCKER
 5. DOCKERHUB REGISTRY
+6. Trivy
 
 Steps we are following:
 1. Configure servers for jenkins and sonarqube application.
@@ -18,7 +17,8 @@ Steps we are following:
 4. Install all required plugins for project.
 5. Add credentials in global list for docker, git, sonar.
 6. Write 'dockerfile' and 'jenkinsfile' stages.
-7. Run your build  
+7. Run your build
+8. Check vernability with trivy.
 
 You can run application after dockerize it:
 
@@ -36,10 +36,10 @@ You can run application after dockerize it:
 
 
 - PHASE:2
-8. Install trivy and check build image
-9. Configure OWAPS  
-10. Configure Nexus for artifact management
-10. Deploy application using apache server. 
+10. Configure Nexus for artifact management(Optional)
+Here,You can copy artifact from maven build stage.
+11. And deploy application using apache, nginx server. 
+
 
 - PHASE:3
 
