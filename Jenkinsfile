@@ -30,29 +30,7 @@ pipeline {
                       }
 
     
-    stage("Maven Build") {
-      steps {
-        script {
-          sh "mvn clean package"
-        }
-      }
-    }
-    
-    
-    
-    stage('SonarQube Analysis') {
-            steps {
-                script {
-                     withSonarQubeEnv(credentialsId: 'sonar') {
   
-                                      sh 'mvn clean verify sonar:sonar \
-                                      -Dsonar.projectKey=hello-world \
-                                      -Dsonar.host.url=http://localhost:9000 \
-                                      -Dsonar.login=$SONAR_TOKEN'
-                    }
-                 }
-              }
-           }
 
     stage('Build Docker Image') {
       steps {
