@@ -40,7 +40,18 @@ You can run application after dockerize it:
 Here,You can copy artifact from maven build stage.
 11. And deploy application using apache, nginx server. 
 
-
+for deploying jar artifact we have to write copy artifact stage to apache staging file with symlink.
+Before that we need to login apache using ssh key.
+```
+ stage('Copy Artifact') {
+   steps {
+// Copy the JAR artifact to Apache's DocumentRoot
+sh 'scp -i ${ssh_key} hello-world.jar sparx@apache-server:/var/www/staging/'
+            }
+        }
+    }
+```
+Define env var  ${ssh_key} in env
 - PHASE:3
 
 Tools -
