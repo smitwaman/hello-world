@@ -33,8 +33,40 @@ You can run application after dockerize it:
 ![SonarQube Output:](https://github.com/smitwaman/hello-world/blob/main/Images/Screenshot%202024-04-10%20064735.png)
 
 ![Docker-Browser Output:]()
-Jenkins pipeline:
+- Jenkins pipeline:
 
+stages {
+    
+    stage('Workspace Cleaning'){
+            steps{
+                cleanWs()
+            }
+        }
+    
+    stage('Checkout') {
+      steps {
+            checkout scm // Checkout source code from version control
+            }
+                      }
+
+     stage('Build Docker Image') {
+            steps {
+                // Build your Docker image here if it's not already built
+                sh 'docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .'
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                // Login to Docker Hub using credentials
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                    sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
+                }
+
+                // Push the Docker image to Docker Hub
+                sh "docker push ${DOCKER_IMAGE}"
+            }
+        }
 
 
 
