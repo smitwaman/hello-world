@@ -38,7 +38,7 @@ pipeline {
             docker.build('helloworld')
 
           // Tag Docker image
-                    docker.image('helloworld').tag('latest')
+                    docker.image('smitwaman/helloworld').tag('latest')
               }
             } 
           }
@@ -50,7 +50,7 @@ pipeline {
                 script {
                   
                   docker.withRegistry('https://docker.io/smitwaman', 'dockerhub') {
-                        docker.image('helloworld').push('latest')
+                        docker.image('smitwaman/helloworld').push('latest')
                         }
                      }
                   }
