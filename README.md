@@ -25,6 +25,16 @@ You can run application after dockerize it:
 ```
  sudo docker run --name helloworld -p 8086:8080 smiwaman/helloworld:latest
 ```
+
+
+
+![Jenkins Output:]()
+
+![SonarQube Output:]()
+
+![Docker-Browser Output:]()
+
+
 - PHASE:2
 8. Install trivy and check build image
 9. Configure OWAPS  
