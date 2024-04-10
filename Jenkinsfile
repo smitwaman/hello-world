@@ -50,7 +50,7 @@ pipeline {
                 }
 
                 // Push the Docker image to Docker Hub
-                sh "docker push ${DOCKER_REPO}:${DOCKER_TAG}"
+                sh "docker push ${DOCKER_REPO}:${IMAGE_TAG}"
             }
         }
 
