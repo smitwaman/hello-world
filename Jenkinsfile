@@ -57,16 +57,16 @@ pipeline {
     stage('Build Docker Image') {
       steps {
        script {
-            docker.build('smitwaman/helloworld')
+            docker.build('helloworld')
 
           // Tag Docker image
-                    docker.image('smitwaman/helloworld').tag('latest')
+                    docker.image('helloworld').tag('latest')
               }
             } 
           }
     stage("TRIVY"){
       steps{
-             sh "trivy image --scanners vuln smitwaman/helloworld:latest > trivy.txt"
+             sh "trivy image --scanners vuln helloworld:latest > trivy.txt"
           }  
         } 
    
@@ -76,8 +76,8 @@ pipeline {
                 // Push Docker image to Docker Hub repository
                 script {
                   
-                  docker.withRegistry('https://docker.io', 'dockerhub') {
-                        docker.image('smitwaman/helloworld').push('latest')
+                  docker.withRegistry('https://docker.io/smitwaman', 'dockerhub') {
+                        docker.image('helloworld').push('latest')
                         }
                      }
                   }
