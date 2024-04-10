@@ -42,11 +42,6 @@ pipeline {
               }
             } 
           }
-    stage("TRIVY"){
-      steps{
-             sh "trivy image --scanners vuln helloworld:latest > trivy.txt"
-          }  
-        } 
    
     
     stage('Push Docker Image') {
