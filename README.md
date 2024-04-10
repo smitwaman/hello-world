@@ -42,21 +42,43 @@ stages {
                 cleanWs()
             }
         }
-    
     stage('Checkout') {
       steps {
             checkout scm // Checkout source code from version control
             }
-                      }
+                      }    
+    stage("Maven Build") {
+      steps {
+        script {
+          sh "mvn clean package"
+           }
+         }
+       }
+    
+    stage('SonarQube Analysis') {
+            steps {
+                script {
+                     withSonarQubeEnv(credentialsId: 'sonar') {
+  
+                     sh 'mvn clean verify sonar:sonar \
+                      -Dsonar.projectKey=hello-world \
+                      -Dsonar.host.url=http://localhost:9000 \
+                      -Dsonar.login=$SONAR_TOKEN'
+                    }
+                }
+            }
+        }
 
-     stage('Build Docker Image') {
+    stage('Build Docker Image') {
             steps {
                 // Build your Docker image here if it's not already built
                 sh 'docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .'
             }
         }
 
-        stage('Push Docker Image') {
+     
+     
+     stage('Push Docker Image') {
             steps {
                 // Login to Docker Hub using credentials
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
