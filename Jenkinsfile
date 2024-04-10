@@ -10,7 +10,7 @@ pipeline {
         IMAGE_TAG = 'latest'                   // Replace with the tag you want to use
         DOCKER_IMAGE = "${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
     }
-  }
+  
 
   
   tools {      
@@ -53,14 +53,14 @@ pipeline {
                 sh "docker push ${DOCKER_REPO}:${DOCKER_TAG}"
             }
         }
-    }
+    
 
     post {
         always {
             // Logout from Docker Hub after pushing the image
             sh 'docker logout'
         }
-  
+    }
 
     
 
