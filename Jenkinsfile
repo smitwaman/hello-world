@@ -53,14 +53,6 @@ pipeline {
                 sh "docker push ${DOCKER_REPO}:${DOCKER_TAG}"
             }
         }
-    
-
-    post {
-        always {
-            // Logout from Docker Hub after pushing the image
-            sh 'docker logout'
-        }
-    }
 
     
 
