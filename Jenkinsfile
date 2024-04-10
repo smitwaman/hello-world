@@ -76,7 +76,7 @@ pipeline {
                 // Push Docker image to Docker Hub repository
                 script {
                   
-                  docker.withRegistry('https://registry-1.docker.io/v2/', 'dockerhub') {
+                  docker.withRegistry('https://docker.io', 'dockerhub') {
                         docker.image('smitwaman/helloworld').push('latest')
                         }
                      }
