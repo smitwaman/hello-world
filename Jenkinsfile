@@ -66,7 +66,7 @@ pipeline {
           }
     stage("TRIVY"){
       steps{
-             sh "trivy image smitwaman/helloworld:latest > trivy.txt"
+             sh "trivy image --scanners vuln smitwaman/helloworld:latest > trivy.txt"
           }  
         } 
    
