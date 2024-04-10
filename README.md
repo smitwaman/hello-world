@@ -33,6 +33,9 @@ You can run application after dockerize it:
 ![SonarQube Output:](https://github.com/smitwaman/hello-world/blob/main/Images/Screenshot%202024-04-10%20064735.png)
 
 ![Docker-Browser Output:]()
+Jenkins pipeline:
+
+
 
 
 - PHASE:2
