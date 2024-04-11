@@ -35,25 +35,22 @@ pipeline {
             checkout scm // Checkout source code from version control
             }
                       }
+
+
+    stage('Workspace Cleaning'){
+            steps{
+                cleanWs()
+            }
+        }
+    
+   
+    stage('OWASP Dependency') {
+            steps {
+                dependencyCheck additionalArguments: '--scan ./ ', odcInstallation: 'owasp'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
      
-     stage('Build Docker Image') {
-            steps {
-                // Build your Docker image here if it's not already built
-                sh 'docker build -t ${DOCKER_IMAGE} .'
-            }
-        }
-
-        stage('Push Docker Image') {
-            steps {
-                // Login to Docker Hub using credentials
-                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                    sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
-                }
-
-                // Push the Docker image to Docker Hub
-                sh "docker push ${DOCKER_IMAGE}"
-            }
-        }
 
     
 
