@@ -37,11 +37,6 @@ pipeline {
                       }
 
 
-    stage('Workspace Cleaning'){
-            steps{
-                cleanWs()
-            }
-        }
     
    
     stage('OWASP Dependency') {
