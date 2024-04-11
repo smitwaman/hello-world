@@ -1,8 +1,39 @@
+pipeline {
+
+  agent any
+
+  environment {
+        SONAR_TOKEN = credentials('sonar')
+        IMAGE_NAME = 'hello-world'
+        DOCKER_REGISTRY = 'https://docker.io'  // Replace with your Docker registry URL
+        DOCKER_REPO = 'smitwaman'         // Replace with your repository name
+        IMAGE_TAG = 'latest'                   // Replace with the tag you want to use
+        DOCKER_IMAGE = "${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}"
+    }
+  
+
+  
+  tools {      
+    git 'git'
+    maven 'maven'
+  
+        }  
+  
 
 
-
-
-
+  stages {
+    
+    stage('Workspace Cleaning'){
+            steps{
+                cleanWs()
+            }
+        }
+    
+    stage('Checkout') {
+      steps {
+            checkout scm // Checkout source code from version control
+            }
+                      }
 
     stage("Maven Build") {
       steps {
@@ -23,11 +54,7 @@
                }
            }
 
-
-
-
-
- stage("TRIVY"){
+    stage("TRIVY"){
       steps{
              sh "trivy image --scanners vuln smitwaman/helloworld:latest > trivy.txt"
           }  
