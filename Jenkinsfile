@@ -7,7 +7,7 @@ pipeline {
         IMAGE_NAME = 'hello-world'
         DOCKER_REGISTRY = 'https://docker.io'  // Replace with your Docker registry URL
         DOCKER_REPO = 'smitwaman'         // Replace with your repository name
-        IMAGE_TAG = 'latest'                   // Replace with the tag you want to use
+        IMAGE_TAG = 'v1'                   // Replace with the tag you want to use
         DOCKER_IMAGE = "${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}"
     }
   
@@ -39,7 +39,7 @@ pipeline {
      stage('Build Docker Image') {
             steps {
                 // Build your Docker image here if it's not already built
-                sh 'docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .'
+                sh 'docker build -t ${DOCKER_IMAGE} .'
             }
         }
 
