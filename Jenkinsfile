@@ -28,13 +28,19 @@ pipeline {
                 cleanWs()
             }
         }
-    
+    stage('OWASP Dependency') {
+            steps {
+                dependencyCheck additionalArguments: '--scan ./ ', odcInstallation: 'owasp'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
+
     stage('Checkout') {
       steps {
             checkout scm // Checkout source code from version control
             }
                       }
-
+     
      stage('Build Docker Image') {
             steps {
                 // Build your Docker image here if it's not already built
