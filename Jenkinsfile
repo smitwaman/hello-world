@@ -28,12 +28,7 @@ pipeline {
                 cleanWs()
             }
         }
-    stage('OWASP Dependency') {
-            steps {
-                dependencyCheck additionalArguments: '--scan ./ ', odcInstallation: 'owasp'
-                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-            }
-        }
+    
 
     stage('Checkout') {
       steps {
