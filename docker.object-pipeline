@@ -1,0 +1,91 @@
+pipeline {
+    agent any
+    
+    environment {
+        SONAR_TOKEN = credentials('sonar')
+        IMAGE_NAME = 'hello-world'
+        DOCKER_REGISTRY = 'https://docker.io'  // Replace with your Docker registry URL
+        DOCKER_REPO = 'smitwaman'         // Replace with your repository name
+        IMAGE_TAG = 'latest'                   // Replace with the tag you want to use
+        DOCKER_IMAGE = "${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}"
+    }
+  
+    tools {      
+        git 'git'
+        maven 'maven'
+        dockerTool 'docker' // Assuming a Docker tool is configured in Jenkins
+    }  
+    
+    stages {
+        stage('Workspace Cleaning') {
+            steps {
+                cleanWs()
+            }
+        }
+    
+        stage('Checkout') {
+            steps {
+                checkout scm // Checkout source code from version control
+            }
+        }
+    
+        stage('OWASP Dependency Check') {
+            steps {
+                script {
+                    def reportDir = "${env.WORKSPACE}/dependency-check-report"
+                    docker.image('owasp/dependency-check:latest')
+                          .inside("-v ${reportDir}:/usr/src/dependency-check/report") {
+                              sh "dependency-check --scan /usr/src/app --format ALL --project 'My Project' --out ${reportDir}"
+                          }
+                }
+                junit '**/dependency-check-report.xml'
+            }
+        }
+    
+        stage('Maven Build') {
+            steps {
+                script {
+                    sh "mvn clean package"
+                }
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    withSonarQubeEnv(credentialsId: 'sonar') {
+                        sh "mvn clean verify sonar:sonar \ -Dsonar.projectKey=hello-world \ -Dsonar.host.url=http://localhost:9000 \ -Dsonar.login=$SONAR_TOKEN"
+                    }
+                }
+            }
+        }
+
+        stage('Trivy Scan') {
+            steps {
+                script {
+                    sh "trivy image --scanners vuln smitwaman/helloworld:latest > trivy.txt"
+                }
+            }
+        }
+    
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build("${IMAGE_NAME}:${IMAGE_TAG}", '.')
+                }
+            }
+        }
+    
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                        docker.withRegistry('', DOCKER_REGISTRY) {
+                            docker.image("${IMAGE_NAME}:${IMAGE_TAG}").push("${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}")
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
