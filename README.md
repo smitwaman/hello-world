@@ -28,69 +28,11 @@ You can run application after dockerize it:
 
 
 
-![Jenkins Output:]()
+![Jenkins Output:](https://github.com/smitwaman/hello-world/blob/main/Images/Screenshot%202024-04-11%20094522.png)
 
 ![SonarQube Output:](https://github.com/smitwaman/hello-world/blob/main/Images/Screenshot%202024-04-10%20064735.png)
 
-![Docker-Browser Output:]()
-- Jenkins pipeline:
-
-stages {
-    
-    stage('Workspace Cleaning'){
-            steps{
-                cleanWs()
-            }
-        }
-    stage('Checkout') {
-      steps {
-            checkout scm // Checkout source code from version control
-            }
-                      }    
-    stage("Maven Build") {
-      steps {
-        script {
-          sh "mvn clean package"
-           }
-         }
-       }
-    
-    stage('SonarQube Analysis') {
-            steps {
-                script {
-                     withSonarQubeEnv(credentialsId: 'sonar') {
-  
-                     sh 'mvn clean verify sonar:sonar \
-                      -Dsonar.projectKey=hello-world \
-                      -Dsonar.host.url=http://localhost:9000 \
-                      -Dsonar.login=$SONAR_TOKEN'
-                    }
-                }
-            }
-        }
-
-    stage('Build Docker Image') {
-            steps {
-                // Build your Docker image here if it's not already built
-                sh 'docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .'
-            }
-        }
-
-     
-     
-     stage('Push Docker Image') {
-            steps {
-                // Login to Docker Hub using credentials
-                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                    sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
-                }
-
-                // Push the Docker image to Docker Hub
-                sh "docker push ${DOCKER_IMAGE}"
-            }
-        }
-
-
+![Docker-Browser Output:](https://github.com/smitwaman/hello-world/blob/main/Images/.png)
 
 - PHASE:2
 10. Configure Nexus for artifact management(Optional)
