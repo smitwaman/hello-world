@@ -34,6 +34,12 @@ pipeline {
             checkout scm // Checkout source code from version control
             }
                       }
+    stage('OWASP Dependency') {
+            steps {
+                dependencyCheck additionalArguments: '--scan ./ ', odcInstallation: 'DC'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
 
     stage("Maven Build") {
       steps {
