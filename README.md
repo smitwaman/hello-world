@@ -63,3 +63,7 @@ Tools -
 
 - PHASE:4
 13. Configure and monitor jenkins server and kubernetes using prometheus and grafana
+
+![](https://github.com/smitwaman/hello-world/blob/main/Images/Screenshot%202024-04-12%20125242.png)
+
+
